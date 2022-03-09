@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Drawer, DrawerItem, IndexPath, Icon } from "@ui-kitten/components";
 import DoctorUI from "./screens/Doctor";
-import CareTakerUI from "./screens/Family";
-import FamilyUI from "./screens/CareTaker";
+import FamilyUI from "./screens/Family";
+import CareTakerUI from "./screens/CareTaker";
 import PatientUI from "./screens/Patient";
 
 const { Navigator, Screen } = createDrawerNavigator();

@@ -1,38 +1,26 @@
 import React from "react";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, View, ScrollView } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
     BottomNavigation,
     BottomNavigationTab,
     Icon,
+    Text,
 } from "@ui-kitten/components";
 import DialogsScreen from "../components/OtherUI/Dialogs";
 import SliderScreen from "../components/OtherUI/Slider";
 
 const { Navigator, Screen } = createBottomTabNavigator();
-const Email = (props) => <Icon {...props} name="email-outline" />;
+const Email = props => <Icon {...props} name="email-outline" />;
 
-const BottomTabBar = ({ navigation, state }) => (
-    <SafeAreaView>
-        <BottomNavigation
-            selectedIndex={state.index}
-            onSelect={(index) => navigation.navigate(state.routeNames[index])}
-        >
-            <BottomNavigationTab title="Home" icon={Email} />
-            <BottomNavigationTab title="Games" icon={Email} />
-        </BottomNavigation>
+const CareTakerUI = ({ navigation, state }) => (
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+        <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+            <View>
+                <Text>Test</Text>
+            </View>
+        </ScrollView>
     </SafeAreaView>
 );
 
-const TabNavigator = () => (
-    <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-        <Screen name="Dialogs" component={DialogsScreen} />
-        <Screen name="Slider" component={SliderScreen} />
-    </Navigator>
-);
-
-function MyTabs() {
-    return <TabNavigator />;
-}
-
-export default MyTabs;
+export default CareTakerUI;
