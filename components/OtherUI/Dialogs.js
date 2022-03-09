@@ -83,7 +83,7 @@ const DialogsScreen = ({ navigation }) => {
                                 Call your family
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.bannerCard2}>
+                        <TouchableOpacity style={styles.bannerCard2} onPress={() => navigation.navigate('Slider')}>
                             <Image
                                 source={require("../../assets/game.png")}
                                 style={{ width: 150, height: 100 }}
