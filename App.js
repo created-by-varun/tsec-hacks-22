@@ -1,3 +1,4 @@
+console.disableYellowBox = true;
 import React from "react";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";

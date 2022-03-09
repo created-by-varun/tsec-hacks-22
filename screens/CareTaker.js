@@ -1,26 +1,14 @@
 import React from "react";
-import { SafeAreaView, View, ScrollView } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-    BottomNavigation,
-    BottomNavigationTab,
-    Icon,
-    Text,
-} from "@ui-kitten/components";
-import DialogsScreen from "../components/OtherUI/Dialogs";
-import SliderScreen from "../components/OtherUI/Slider";
+import CareHome from "../components/CareTaker/Home";
+import PatientDetails from "../components/CareTaker/PatientDetails";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
 
-const { Navigator, Screen } = createBottomTabNavigator();
-const Email = props => <Icon {...props} name="email-outline" />;
+function CareStack() {
+    return <Stack.Navigator headerMode="none" initialRouteName={'CareHome'}>
+        <Stack.Screen name="CareHome" component={CareHome} />
+        <Stack.Screen name="PatientDetails" component={PatientDetails} />
+    </Stack.Navigator>;
+}
 
-const CareTakerUI = ({ navigation, state }) => (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-        <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
-            <View>
-                <Text>Test</Text>
-            </View>
-        </ScrollView>
-    </SafeAreaView>
-);
-
-export default CareTakerUI;
+export default CareStack;
