@@ -5,9 +5,10 @@ import {
 } from "@ui-kitten/components";
 
 import MedicalDetails from './UI/Medical'
+import Personal from "./UI/Personal";
 
 const PatientDetails = ({ navigation }) => {
-    const [selectedIndex, setSelectedIndex] = React.useState(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
     const PersonIcon = (props) => (
         <Icon {...props} name='person-outline' />
     );
@@ -34,7 +35,9 @@ const PatientDetails = ({ navigation }) => {
                 <TabView
                     selectedIndex={selectedIndex}
                     shouldLoadComponent={shouldLoadComponent}
-                    onSelect={index => setSelectedIndex(index)}>
+                    onSelect={index => {
+                        setSelectedIndex(index)
+                    }}>
                     <Tab title='Medical' icon={PersonIcon}>
                         <Layout style={styles.tabContainer}>
                             <MedicalDetails />
@@ -42,7 +45,7 @@ const PatientDetails = ({ navigation }) => {
                     </Tab>
                     <Tab title='Personal' icon={EmailIcon}>
                         <Layout style={styles.tabContainer}>
-                            <Text category='h5'>USERS</Text>
+                            <Personal />
                         </Layout>
                     </Tab>
                 </TabView>
