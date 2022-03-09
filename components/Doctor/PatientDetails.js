@@ -39,13 +39,17 @@ const PatientDetails = ({ navigation }) => {
                         setSelectedIndex(index)
                     }}>
                     <Tab title='Medical' icon={PersonIcon}>
-                        <Layout style={styles.tabContainer}>
-                            <MedicalDetails />
-                        </Layout>
+                        <View style={styles.tabContainer}>
+                            <ScrollView showsVerticalScrollIndicator="false">
+                                <MedicalDetails />
+                            </ScrollView>
+                        </View>
                     </Tab>
                     <Tab title='Personal' icon={EmailIcon}>
                         <Layout style={styles.tabContainer}>
-                            <Personal />
+                            <ScrollView>
+                                <Personal />
+                            </ScrollView>
                         </Layout>
                     </Tab>
                 </TabView>
@@ -78,7 +82,8 @@ const styles = StyleSheet.create({
     },
     tabContainer: {
         padding: 20,
-        backgroundColor: 'white'
+        height: 600,
+        overflow: 'scroll'
     }
 });
 
