@@ -7,36 +7,12 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { DrawerActions } from "@react-navigation/native";
+
 import {
-    Layout,
     Text,
-    Button,
-    TopNavigationAction,
-    TopNavigation,
-    Icon,
-} from "@ui-kitten/components";
+} from "@ui-kitten/components"
 
-// Redux
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { increment, reset, decrement } from "../../store/actions/count";
-
-const SliderScreen = ({ navigation }) => {
-    const [visible, setVisible] = React.useState(false);
-
-    const dispatch = useDispatch();
-    const Menu = props => <Icon {...props} name="menu-outline" />;
-    const count = useSelector(state => state.counter.count);
-    const OpenMenu = () => {
-        navigation.dispatch(DrawerActions.toggleDrawer());
-    };
-    const CancelModal = () => {
-        setVisible(false);
-    };
-    const MenuAction = () => (
-        <TopNavigationAction icon={Menu} onPress={OpenMenu} />
-    );
+const GamesHome = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -47,6 +23,9 @@ const SliderScreen = ({ navigation }) => {
 
                     {/* GAME CARDS */}
                     <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate('GameScreen')
+                        }}
                         style={{
                             backgroundColor: "#3366FF",
                             borderRadius: 8,
@@ -56,7 +35,7 @@ const SliderScreen = ({ navigation }) => {
                     >
                         <Image
                             style={{ width: 200, height: 200, flex: 1 }}
-                            source={require("../../assets/tic.png")}
+                            source={require("../../../assets/tic.png")}
                         />
                         <View
                             style={{
@@ -98,7 +77,7 @@ const SliderScreen = ({ navigation }) => {
                         </View>
                         <Image
                             style={{ width: 200, height: 200, flex: 1 }}
-                            source={require("../../assets/slide.jpeg")}
+                            source={require("../../../assets/slide.jpeg")}
                         />
                     </TouchableOpacity>
                 </View>
@@ -113,4 +92,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SliderScreen;
+export default GamesHome;

@@ -7,7 +7,7 @@ import {
     Icon,
 } from "@ui-kitten/components";
 import DialogsScreen from "../components/OtherUI/Dialogs";
-import SliderScreen from "../components/OtherUI/Slider";
+import GamesStack from "../components/OtherUI/Games";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
@@ -28,7 +28,7 @@ const BottomTabBar = ({ navigation, state }) => (
 const TabNavigator = () => (
     <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
         <Screen name="Dialogs" component={DialogsScreen} />
-        <Screen name="Slider" component={SliderScreen} />
+        <Screen name="Slider" component={GamesStack} />
     </Navigator>
 );
 
