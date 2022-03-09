@@ -5,7 +5,7 @@ import {
     View,
     ScrollView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
 } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import {
@@ -50,16 +50,56 @@ const SliderScreen = ({ navigation }) => {
                         style={{
                             backgroundColor: "#3366FF",
                             borderRadius: 8,
-                            flexDirection: 'row'
+                            flexDirection: "row",
+                            marginBottom: 20,
                         }}
                     >
                         <Image
                             style={{ width: 200, height: 200, flex: 1 }}
                             source={require("../../assets/tic.png")}
                         />
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text category={'h4'} style={{color: 'white'}}>Tic Tac Toe</Text>
+                        <View
+                            style={{
+                                flex: 1,
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Text category={"h4"} style={{ color: "white" }}>
+                                Tic Tac Toe
+                            </Text>
                         </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: "#F0740E",
+                            borderRadius: 8,
+                            flexDirection: "row",
+                            marginBottom: 20,
+                        }}
+                    >
+                        <View
+                            style={{
+                                flex: 1,
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Text
+                                category={"h4"}
+                                style={{
+                                    color: "white",
+                                    width: "60%",
+                                }}
+                            >
+                                Memory Cards
+                            </Text>
+                        </View>
+                        <Image
+                            style={{ width: 200, height: 200, flex: 1 }}
+                            source={require("../../assets/tic.png")}
+                        />
                     </TouchableOpacity>
                 </View>
             </ScrollView>
