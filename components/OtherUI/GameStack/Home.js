@@ -83,6 +83,36 @@ const GamesHome = ({ navigation }) => {
                             source={require("../../../assets/slide.jpeg")}
                         />
                     </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate('GameScreen', {uri: 'https://www.improvememory.org/wp-content/games/trickycups_e_fullscreen.htm'})
+                        }}
+                        style={{
+                            backgroundColor: "#F4e392",
+                            borderRadius: 8,
+                            flexDirection: "row",
+                            marginBottom: 20,
+                        }}
+                    >
+                        <Image
+                            style={{ width: 200, height: 200, flex: 1 }}
+                            source={require("../../../assets/cups.jpeg")}
+                        />
+                        <View
+                            style={{
+                                flex: 1,
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Text category={"h4"}>
+                                Tricky cups
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    
                 </View>
             </ScrollView>
         </SafeAreaView>
