@@ -8,6 +8,7 @@ import {
     TopNavigationAction,
     TopNavigation,
     Icon,
+    Avatar
 } from "@ui-kitten/components";
 
 
@@ -31,11 +32,24 @@ const DialogsScreen = ({ navigation }) => {
     const MenuAction = () => (
         <TopNavigationAction icon={Menu} onPress={OpenMenu} />
     );
+
+    const patientData = {
+        name: "John Doe",
+        age: "30",
+    };
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-                <View style={{padding: 20}}>
-                    <Text>Patients home</Text>
+                <View style={{ padding: 20, paddingTop: 30 }}>
+
+                    {/* Header */}
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <Text category={"h4"}>{patientData.name}</Text>
+                        <Avatar size='small' source={require('../../assets/avatar.jpeg')}/>
+                    </View>
+
+                    {/* Banner cards */}
                 </View>
             </ScrollView>
         </SafeAreaView>
