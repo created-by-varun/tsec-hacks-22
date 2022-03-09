@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View, ScrollView } from "react-native";
+import {
+    StyleSheet,
+    SafeAreaView,
+    View,
+    ScrollView,
+    Image,
+} from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import {
     Layout,
@@ -62,20 +68,31 @@ const DialogsScreen = ({ navigation }) => {
                             flexDirection: "row",
                             alignItems: "center",
                             paddingTop: 40,
-                            marginBottom: 40
+                            marginBottom: 40,
                         }}
                     >
                         <View style={[styles.bannerCard]}>
-                            <Text category={'h6'} style={{color: 'white'}}>Call your family</Text>
+                            <Image
+                                source={require("../../assets/call.png")}
+                                style={{ width: 150, height: 100 }}
+                            />
+                            <Text category={"h6"} style={{ color: "white", marginTop: 10, fontWeight: '600' }}>
+                                Call your family
+                            </Text>
                         </View>
                         <View style={styles.bannerCard2}>
-                            <Text category={'h6'} style={{color: 'white'}}>Play some games</Text>
+                            <Image
+                                source={require("../../assets/game.png")}
+                                style={{ width: 150, height: 100 }}
+                            />
+                            <Text category={"h6"} style={{ color: "white", marginTop: 10, fontWeight: '600' }}>
+                                Play some games
+                            </Text>
                         </View>
                     </View>
 
                     {/* Memories - Media */}
-                    <Text category={'h5'}>Memories</Text>
-
+                    <Text category={"h5"}>Memories</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -92,6 +109,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "#3366FF",
         marginRight: 5,
+        alignItems: "center",
     },
     bannerCard2: {
         flex: 1,
@@ -99,7 +117,8 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "#F0740E",
         marginLeft: 5,
-    }
+        alignItems: "center",
+    },
 });
 
 export default DialogsScreen;

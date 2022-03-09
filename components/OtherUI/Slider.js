@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View, ScrollView } from "react-native";
+import {
+    StyleSheet,
+    SafeAreaView,
+    View,
+    ScrollView,
+    Image,
+    TouchableOpacity
+} from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import {
     Layout,
@@ -9,7 +16,6 @@ import {
     TopNavigation,
     Icon,
 } from "@ui-kitten/components";
-
 
 // Redux
 import { useSelector } from "react-redux";
@@ -34,8 +40,27 @@ const SliderScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-                <View style={{padding: 20}}>
-                    <Text>Patients home</Text>
+                <View style={{ padding: 20, paddingTop: 30 }}>
+                    <Text style={{ marginBottom: 30 }} category={"h4"}>
+                        Play some games
+                    </Text>
+
+                    {/* GAME CARDS */}
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: "#3366FF",
+                            borderRadius: 8,
+                            flexDirection: 'row'
+                        }}
+                    >
+                        <Image
+                            style={{ width: 200, height: 200, flex: 1 }}
+                            source={require("../../assets/tic.png")}
+                        />
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text category={'h4'} style={{color: 'white'}}>Tic Tac Toe</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
