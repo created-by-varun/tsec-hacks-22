@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     StyleSheet,
     SafeAreaView,
     View,
     ScrollView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
 } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import {
@@ -17,6 +17,7 @@ import {
     Icon,
     Avatar,
 } from "@ui-kitten/components";
+import ImageView from "react-native-image-viewing";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -24,25 +25,30 @@ import { useDispatch } from "react-redux";
 import { increment, reset, decrement } from "../../store/actions/count";
 
 const DialogsScreen = ({ navigation }) => {
-    const [visible, setVisible] = React.useState(false);
-
-    const dispatch = useDispatch();
-    const Menu = props => <Icon {...props} name="menu-outline" />;
-    const count = useSelector(state => state.counter.count);
-    const OpenMenu = () => {
-        navigation.dispatch(DrawerActions.toggleDrawer());
-    };
-    const CancelModal = () => {
-        setVisible(false);
-    };
-    const MenuAction = () => (
-        <TopNavigationAction icon={Menu} onPress={OpenMenu} />
-    );
-
     const patientData = {
         name: "John Doe",
         age: "30",
     };
+
+    const images = [
+        {
+            uri: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        },
+        {
+            uri: "https://images.unsplash.com/photo-1581579186913-45ac3e6efe93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+        },
+        {
+            uri: "https://images.unsplash.com/photo-1622610607501-32ac9c927216?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+        },
+        {
+            uri: "https://images.unsplash.com/photo-1561524891-8e08ab8569f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+        },
+        {
+            uri: "https://images.unsplash.com/photo-1638202948587-ac48463ddb1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        },
+    ];
+
+    const [visible, setIsVisible] = useState(false);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -77,7 +83,14 @@ const DialogsScreen = ({ navigation }) => {
                                 source={require("../../assets/call.png")}
                                 style={{ width: 150, height: 100 }}
                             />
-                            <Text category={"h6"} style={{ color: "white", marginTop: 10, fontWeight: '600' }}>
+                            <Text
+                                category={"h6"}
+                                style={{
+                                    color: "white",
+                                    marginTop: 10,
+                                    fontWeight: "600",
+                                }}
+                            >
                                 Call your family
                             </Text>
                         </TouchableOpacity>
@@ -86,7 +99,14 @@ const DialogsScreen = ({ navigation }) => {
                                 source={require("../../assets/game.png")}
                                 style={{ width: 150, height: 100 }}
                             />
-                            <Text category={"h6"} style={{ color: "white", marginTop: 10, fontWeight: '600' }}>
+                            <Text
+                                category={"h6"}
+                                style={{
+                                    color: "white",
+                                    marginTop: 10,
+                                    fontWeight: "600",
+                                }}
+                            >
                                 Play some games
                             </Text>
                         </TouchableOpacity>
@@ -94,6 +114,87 @@ const DialogsScreen = ({ navigation }) => {
 
                     {/* Memories - Media */}
                     <Text category={"h5"}>Memories</Text>
+                    <View style={{ flexDirection: "row", marginTop: 20 }}>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={() => setIsVisible(true)}
+                        >
+                            <Image
+                                source={{
+                                    uri: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                                }}
+                                style={{
+                                    flex: 1,
+                                    width: "100%",
+                                    height: 200,
+                                    marginRight: 5,
+                                }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={() => setIsVisible(true)}
+                        >
+                            <Image
+                                source={{
+                                    uri: "https://images.unsplash.com/photo-1581579186913-45ac3e6efe93?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+                                }}
+                                style={{
+                                    flex: 1,
+                                    width: "100%",
+                                    height: 200,
+                                    marginLeft: 5,
+                                }}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={() => setIsVisible(true)}
+                        >
+                            <Image
+                                source={{
+                                    uri: "https://images.unsplash.com/photo-1622610607501-32ac9c927216?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+                                }}
+                                style={{ flex: 1, width: "100%", height: 100 }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={() => setIsVisible(true)}
+                        >
+                            <Image
+                                source={{
+                                    uri: "https://images.unsplash.com/photo-1561524891-8e08ab8569f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+                                }}
+                                style={{
+                                    flex: 1,
+                                    width: "100%",
+                                    height: 100,
+                                    marginHorizontal: 10,
+                                }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={() => setIsVisible(true)}
+                        >
+                        <Image
+                            source={{
+                                uri: "https://images.unsplash.com/photo-1638202948587-ac48463ddb1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                            }}
+                            style={{ flex: 1, width: "100%", height: 100 }}
+                        />
+                        </TouchableOpacity>
+                    </View>
+                    <ImageView
+                        style={{ width: 400, height: 200 }}
+                        images={images}
+                        imageIndex={0}
+                        visible={visible}
+                        onRequestClose={() => setIsVisible(false)}
+                    />
                 </View>
             </ScrollView>
         </SafeAreaView>

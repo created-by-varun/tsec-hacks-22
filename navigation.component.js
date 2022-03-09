@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Drawer, DrawerItem, IndexPath, Icon } from "@ui-kitten/components";
 import DoctorUI from "./screens/Doctor";
-import FamilyUI from "./screens/Family";
 import CareTakerUI from "./screens/CareTaker";
 import PatientUI from "./screens/Patient";
 
@@ -26,7 +25,6 @@ const DrawerContent = ({ navigation, state }) => (
       <DrawerItem title="Patient" accessoryLeft={PersonIcon} />
       <DrawerItem title="Doctor" accessoryLeft={DoctorIcon} />
       <DrawerItem title="Caretaker" accessoryLeft={CareTakerIcon} />
-      <DrawerItem title="Family" accessoryLeft={FamilyIcon} />
     </Drawer>
   </SafeAreaView>
 );
@@ -36,7 +34,6 @@ const HomeNavigator = () => (
     <Screen name="OtherUI" component={PatientUI} />
     <Screen name="Inputs" component={DoctorUI} />
     <Screen name="Typography" component={CareTakerUI} />
-    <Screen name="Buttons" component={FamilyUI} />
   </Navigator>
 );
 
