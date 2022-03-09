@@ -4,12 +4,14 @@ import {
     Text, Avatar, Tab, TabView, Icon, Layout
 } from "@ui-kitten/components";
 
+import MedicalDetails from './UI/Medical'
+
 const PatientDetails = ({ navigation }) => {
     const [selectedIndex, setSelectedIndex] = React.useState(null);
     const PersonIcon = (props) => (
         <Icon {...props} name='person-outline' />
     );
-    
+
     const EmailIcon = (props) => (
         <Icon {...props} name='email-outline' />
     );
@@ -30,13 +32,12 @@ const PatientDetails = ({ navigation }) => {
                     </View>
                 </View>
                 <TabView
-                    style={styles.tabView}
                     selectedIndex={selectedIndex}
                     shouldLoadComponent={shouldLoadComponent}
                     onSelect={index => setSelectedIndex(index)}>
                     <Tab title='Medical' icon={PersonIcon}>
                         <Layout style={styles.tabContainer}>
-                            <Text category='h5'>ORDERS</Text>
+                            <MedicalDetails />
                         </Layout>
                     </Tab>
                     <Tab title='Personal' icon={EmailIcon}>
@@ -71,9 +72,6 @@ const styles = StyleSheet.create({
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
-    },
-    tabView: {
-        backgroundColor: 'white'
     },
     tabContainer: {
         padding: 20,
