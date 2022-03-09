@@ -5,6 +5,7 @@ import {
     View,
     ScrollView,
     Image,
+    TouchableOpacity
 } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import {
@@ -71,7 +72,7 @@ const DialogsScreen = ({ navigation }) => {
                             marginBottom: 40,
                         }}
                     >
-                        <View style={[styles.bannerCard]}>
+                        <TouchableOpacity style={[styles.bannerCard]}>
                             <Image
                                 source={require("../../assets/call.png")}
                                 style={{ width: 150, height: 100 }}
@@ -79,8 +80,8 @@ const DialogsScreen = ({ navigation }) => {
                             <Text category={"h6"} style={{ color: "white", marginTop: 10, fontWeight: '600' }}>
                                 Call your family
                             </Text>
-                        </View>
-                        <View style={styles.bannerCard2}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.bannerCard2}>
                             <Image
                                 source={require("../../assets/game.png")}
                                 style={{ width: 150, height: 100 }}
@@ -88,7 +89,7 @@ const DialogsScreen = ({ navigation }) => {
                             <Text category={"h6"} style={{ color: "white", marginTop: 10, fontWeight: '600' }}>
                                 Play some games
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
 
                     {/* Memories - Media */}
