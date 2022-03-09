@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, SafeAreaView, View, ScrollView, TouchableWithoutFeedback } from "react-native";
 import {
     Text,
@@ -7,6 +7,8 @@ import {
     Input
 } from "@ui-kitten/components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Firebase from "../../Firebase";
+const auth = Firebase.auth();
 
 const DocHome = ({ navigation }) => {
 
@@ -16,6 +18,10 @@ const DocHome = ({ navigation }) => {
             <Icon {...props} name={'search'} />
         </TouchableWithoutFeedback>
     );
+
+    const login = async () => {
+        await auth.signInWithEmailAndPassword('test@test.com', "SMart@123");
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -32,7 +38,7 @@ const DocHome = ({ navigation }) => {
                         />
                         <Avatar size='small' source={require('../../assets/avatar.jpeg')} />
                     </View>
-                    <TouchableOpacity onPress={() => navigation.navigate("PatientDetails")}>
+                    <TouchableOpacity onPress={() => login()}>
                         <View style={styles.patientCard}>
                             <View style={{ flexDirection: 'row' }}>
                                 <View style={styles.patientInfo}>
