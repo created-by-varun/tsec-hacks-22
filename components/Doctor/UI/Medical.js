@@ -19,13 +19,13 @@ const Medical = () => {
                         <Text style={styles.when}>Dosage directions</Text>
                         <Text>Morning, Afternoon, Evening</Text>
                     </View>
-                    <Input
+                    {/* <Input
                         style={styles.input}
                         value={value}
                         placeholder='Search Patient'
                         accessoryRight={renderIcon}
                         onChangeText={nextValue => setValue(nextValue)}
-                    />
+                    /> */}
                 </View>
             </View>
         </View>
