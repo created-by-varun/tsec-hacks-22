@@ -73,7 +73,7 @@ const SliderScreen = ({ navigation }) => {
 
                     <TouchableOpacity
                         style={{
-                            backgroundColor: "#F0740E",
+                            backgroundColor: "#054D4D",
                             borderRadius: 8,
                             flexDirection: "row",
                             marginBottom: 20,
@@ -93,12 +93,12 @@ const SliderScreen = ({ navigation }) => {
                                     width: "60%",
                                 }}
                             >
-                                Memory Cards
+                                Slide
                             </Text>
                         </View>
                         <Image
                             style={{ width: 200, height: 200, flex: 1 }}
-                            source={require("../../assets/tic.png")}
+                            source={require("../../assets/slide.jpeg")}
                         />
                     </TouchableOpacity>
                 </View>
