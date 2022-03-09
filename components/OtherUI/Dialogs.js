@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import { StyleSheet, SafeAreaView, View, ScrollView } from "react-native";
 import { DrawerActions } from "@react-navigation/native";
 import {
     Layout,
@@ -21,8 +21,8 @@ const DialogsScreen = ({ navigation }) => {
     const [visible, setVisible] = React.useState(false);
 
     const dispatch = useDispatch();
-    const Menu = (props) => <Icon {...props} name="menu-outline" />;
-    const count = useSelector((state) => state.counter.count);
+    const Menu = props => <Icon {...props} name="menu-outline" />;
+    const count = useSelector(state => state.counter.count);
     const OpenMenu = () => {
         navigation.dispatch(DrawerActions.toggleDrawer());
     };
@@ -34,14 +34,11 @@ const DialogsScreen = ({ navigation }) => {
     );
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <TopNavigation
-                title=""
-                alignment="center"
-                accessoryLeft={MenuAction}
-            />
-            <Layout style={{ flex: 1, padding: 15 }}>
-                <Text>Patients home</Text>
-            </Layout>
+            <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+                <View style={{padding: 20}}>
+                    <Text>Patients home</Text>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 };

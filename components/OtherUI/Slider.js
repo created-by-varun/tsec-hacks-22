@@ -10,11 +10,6 @@ import {
     Divider,
 } from "@ui-kitten/components";
 
-import CarouselCards from "./Carousel/CarouselCards";
-import VideoPlayer from "../VideoPlayer";
-import FilePicker from "../FilePicker";
-import TabView from "../TabView";
-
 export const SliderScreen = ({ navigation }) => {
     const Menu = (props) => <Icon {...props} name="menu-outline" />;
     const OpenMenu = () => {
@@ -33,25 +28,7 @@ export const SliderScreen = ({ navigation }) => {
             />
             <Layout style={{ flex: 1, padding: 15 }}>
                 <ScrollView  showsVerticalScrollIndicator={false}>
-                <Text category="h5">Slider / Carousel</Text>
-                <CarouselCards />
-                <Divider />
-                    <Text style={styles.heading} category="h5">
-                        Tabs / Tab View
-                    </Text>
-                    <TabView />
-                    <Divider />
-                    <Text style={styles.heading} category="h5">
-                        Video Player
-                    </Text>
-                    <VideoPlayer />
-
-                    <Divider />
-                    <Text style={styles.heading} category="h5">
-                        File Picker
-                    </Text>
-
-                    <FilePicker />
+                    <Text>Patients Games</Text>
 
                 </ScrollView>
             </Layout>

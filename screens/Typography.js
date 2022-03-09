@@ -11,8 +11,6 @@ import {
     ListItem,
 } from "@ui-kitten/components";
 
-import GridView from "../components/GridView";
-
 // icon imports
 const Menu = props => <Icon {...props} name="menu-outline" />;
 
@@ -84,8 +82,6 @@ export const TypographyScreen = ({ navigation }) => {
                     />
 
                     <Divider />
-
-                    <GridView />
 
                 </ScrollView>
             </Layout>
