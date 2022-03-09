@@ -1,15 +1,19 @@
 import React from "react";
-import { Text } from '@ui-kitten/components'
-import { View, ScrollView } from "react-native";
-import { Audio } from 'expo-av';
+import { WebView } from 'react-native-webview';
+import { Text } from "@ui-kitten/components";
+import { View } from "react-native";
 
-const MusicScreen = ({ navigation }) => {
+const MusicScreen = () => {
     return (
-        <ScrollView style={{flex:1, backgroundColor: 'white'}}>
-            <View style={{padding: 20, paddingTop: 30}}>
-            <Text category={'h4'} style={{width: '80%'}}>Today's selection of soothing music:</Text>
-            </View>
-        </ScrollView>
+      <>
+        <View style={{padding: 20, backgroundColor: 'white'}}>
+            <Text category={'h4'} style={{width: '80%'}}>Top calming music picks for today</Text>
+        </View>
+          <WebView 
+          style={{flex: 1}}
+          source={{ uri: 'https://open.spotify.com/playlist/1sbvt56bSpg6WBqVzIRpID' }}
+          />
+      </>
     )
 }
 

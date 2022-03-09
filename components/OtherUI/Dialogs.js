@@ -6,11 +6,34 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
+    Alert
 } from "react-native";
 import { Video, AVPlaybackStatus } from "expo-av";
 import { Text, Avatar } from "@ui-kitten/components";
 import ImageView from "react-native-image-viewing";
+import * as Notifications from 'expo-notifications';
 
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
+  
+  Notifications.requestPermissionsAsync()
+    .then(permission => {
+      Notifications.scheduleNotificationAsync({
+        content: {
+            title: 'Reminder',
+            subtitle: 'Call your family members and check in on them now!',
+        },
+        trigger: {
+            seconds: 5,
+        }
+      });
+    })
+  
 const DialogsScreen = ({ navigation }) => {
     const patientData = {
         name: "John Doe",
@@ -67,7 +90,7 @@ const DialogsScreen = ({ navigation }) => {
                             marginBottom: 40,
                         }}
                     >
-                        <TouchableOpacity style={[styles.bannerCard]}>
+                        <TouchableOpacity onPress={() => navigation.navigate('FamilyScreen')} style={[styles.bannerCard]}>
                             <Image
                                 source={require("../../assets/call.png")}
                                 style={{ width: 150, height: 100 }}

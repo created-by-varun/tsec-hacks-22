@@ -6,8 +6,12 @@ import { Drawer, DrawerItem, IndexPath, Icon } from "@ui-kitten/components";
 import DoctorUI from "./screens/Doctor";
 import CareTakerUI from "./screens/CareTaker";
 import PatientUI from "./screens/Patient";
+import Family from "./components/OtherUI/Famiy";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const { Navigator, Screen } = createDrawerNavigator();
+
+const Stack = createStackNavigator();
 
 // Importing icons required
 const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
@@ -37,8 +41,18 @@ const HomeNavigator = () => (
   </Navigator>
 );
 
+const RootNavigator = () => {
+  return (
+    <Stack.Navigator headerMode='none'>
+      <Stack.Screen name="Root" component={HomeNavigator} >
+      </Stack.Screen>
+      <Stack.Screen name="FamilyScreen" component={Family}></Stack.Screen>
+    </Stack.Navigator>
+  )
+}
+
 export const AppNavigator = () => (
   <NavigationContainer>
-    <HomeNavigator />
+    <RootNavigator />
   </NavigationContainer>
 );
