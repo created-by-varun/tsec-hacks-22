@@ -24,7 +24,7 @@ const GamesHome = ({ navigation }) => {
                     {/* GAME CARDS */}
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate('GameScreen')
+                            navigation.navigate('GameScreen', {uri: 'https://playtictactoe.org/'})
                         }}
                         style={{
                             backgroundColor: "#3366FF",
@@ -56,6 +56,9 @@ const GamesHome = ({ navigation }) => {
                             borderRadius: 8,
                             flexDirection: "row",
                             marginBottom: 20,
+                        }}
+                        onPress={() => {
+                            navigation.navigate('GameScreen', {uri: 'https://www.improvememory.org/wp-content/games/slide/index.html'})
                         }}
                     >
                         <View
