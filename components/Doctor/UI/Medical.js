@@ -19,53 +19,25 @@ appwrite
     .setEndpoint("http://localhost/v1") // Your Appwrite Endpoint
     .setProject("6228cca7c05ffbaf27d3"); // Your project ID
 
-// let createDietRequest = appwrite.database.createDocument('6228e0039cf5ed1bc280', "unique()", {
-//     "title": "food item 4",
-//     "description": "description 4",
-//     "$read": [
-//         "role:all"
-//     ],
-//     "$write": [
-//         "role:all"
-//     ],
-//     "$collection": "6228e0039cf5ed1bc280"
-// });
 
-// createDietRequest.then(function (response) {
-//     console.log(response); // Success
-// }, function (error) {
-//     console.log(error); // Failure
-// });
-
-let editDietRequest = appwrite.database.updateDocument(
-    "6228e0039cf5ed1bc280",
-    "62290b15622f0dd238ac",
-    {
-        title: "test food3",
-        description: "food desc3",
-        $read: ["role:all"],
-        $write: ["role:all"],
-        $collection: "6228e0039cf5ed1bc280",
-    }
-);
-
-editDietRequest.then(
-    function (response) {
-        console.log(response); // Success
-    },
-    function (error) {
-        console.log(error); // Failure
-    }
-);
 
 const Medical = () => {
     const [diet, setDiet] = useState([]);
     const [visible, setVisible] = React.useState(false);
     const [addDiet, setaddDiet] = React.useState("");
     const [addDesc, setAddDesc] = React.useState("");
+    const [dosages, setDosages] = React.useState([]);
+    const [visible2, setVisible2] = React.useState(false);
+    const [addDosageMed, setDosageMed] = React.useState("");
+    const [addFrom, setaddFrom] = React.useState("");
+    const [addTo, settAddTo] = React.useState(""); 
+    const [dosageInsts, setDosageInsts] = React.useState("");
+    const [remarks, setRemarks] = React.useState("");
+
 
     useEffect(() => {
         getDiets();
+        getDosage();
     }, []);
 
     const getDiets = () => {
@@ -75,8 +47,21 @@ const Medical = () => {
 
         getDietRequest.then(
             function (response) {
-                console.log(response);
                 setDiet(response.documents);
+            },
+            function (error) {
+                console.log(error); // Failure
+            }
+        );
+    };
+
+    const getDosage = () => {
+        let getDosage = appwrite.database.listDocuments("6228e1626152b2089b96");
+
+        getDosage.then(
+            function (response) {
+                console.log(response); // Success
+                setDosages(response.documents);
             },
             function (error) {
                 console.log(error); // Failure
@@ -113,6 +98,42 @@ const Medical = () => {
         );
     };
 
+    const addDosageFc = () => {
+        let createDosage = appwrite.database.createDocument(
+            "6228e1626152b2089b96",
+            "unique()",
+            {
+                medicationName: addDosageMed,
+                fromDt: addFrom,
+                toDt: addTo,
+                dosageTimings: dosageInsts,
+                dosageInstructions: remarks,
+                $read: ["role:all"],
+                $write: ["role:all"],
+                $collection: "6228e1626152b2089b96",
+                isActive: true
+            }
+        );
+
+        setDosageMed("");
+        setaddFrom("");
+        settAddTo("");
+        setDosageInsts("");
+        setRemarks("");
+        setVisible2(false);
+
+        createDosage.then(
+            function (response) {
+                setTimeout(() => {
+                    getDosage();
+                }, 1000);
+            },
+            function (error) {
+                console.log(error); // Failure
+            }
+        );
+    }
+
     const deleteDiet = id => {
         let deleteDietRequest = appwrite.database.deleteDocument(
             "6228e0039cf5ed1bc280",
@@ -122,6 +143,25 @@ const Medical = () => {
             function (response) {
                 setTimeout(() => {
                     getDiets();
+                }, 1000);
+            },
+            function (error) {
+                console.log(error); // Failure
+            }
+        );
+    };
+
+    const endDosage = id => {
+        let endDosageRqt = appwrite.database.updateDocument(
+            "6228e1626152b2089b96",
+            id,{
+                isActive: false
+            }
+        );
+        endDosageRqt.then(
+            function (response) {
+                setTimeout(() => {
+                    getDosage();
                 }, 1000);
             },
             function (error) {
@@ -159,16 +199,14 @@ const Medical = () => {
         />
     );
 
-    const EditIcon = props => <Icon {...props} name="edit" />;
-
     const DeleteIcon = props => <Icon {...props} name="trash-2-outline" />;
 
-    const CardHeader = data => (
+    const CardHeader = ({ data }) => (
         <>
-            <Text style={styles.name}>Medication Name</Text>
+            <Text style={styles.name}>{data.medicationName} </Text>
             <View style={{ flexDirection: "row" }}>
-                <Text style={styles.date}>From: 12/12/2021</Text>
-                <Text style={styles.date}>End: 12/12/2022</Text>
+                <Text style={styles.date}>From: {data.fromDt} </Text>
+                <Text style={styles.date}>End: {data.toDt} </Text>
             </View>
         </>
     );
@@ -197,6 +235,45 @@ const Medical = () => {
                         <Button onPress={() => addDietFnc()}>ADD</Button>
                     </Card>
                 </Modal>
+                <Modal
+                    visible={visible2}
+                    backdropStyle={styles.backdrop}
+                    onBackdropPress={() => setVisible2(false)}
+                >
+                    <Card disabled={true} style={{ width: 260 }}>
+                        <Input
+                            style={styles.input}
+                            onChangeText={setDosageMed}
+                            value={addDosageMed}
+                            placeholder="Enter medication"
+                        />
+                        <Input
+                            style={styles.input}
+                            onChangeText={setaddFrom}
+                            value={addFrom}
+                            placeholder="Enter from date"
+                        />
+                         <Input
+                            style={styles.input}
+                            onChangeText={settAddTo}
+                            value={addTo}
+                            placeholder="Enter to date"
+                        />
+                         <Input
+                            style={styles.input}
+                            onChangeText={setDosageInsts}
+                            value={dosageInsts}
+                            placeholder="Enter dosage instructions"
+                        />
+                           <Input
+                            style={styles.input}
+                            onChangeText={setRemarks}
+                            value={remarks}
+                            placeholder="Enter remarks"
+                        />
+                        <Button onPress={() => addDosageFc()}>ADD</Button>
+                    </Card>
+                </Modal>
                 <View style={styles.box}>
                     <Text style={styles.when}>BP</Text>
                     <Text style={styles.when}>Normal</Text>
@@ -219,69 +296,82 @@ const Medical = () => {
                 </View>
             </View>
             <View style={{ marginTop: 10 }}>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Text category={"h5"}>Recommended Diet</Text>
+                    <Button size={"small"} onPress={() => setVisible(true)}>
+                        ADD
+                    </Button>
+                </View>
                 <View style={styles.Card}>
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            marginRight: 8,
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <Text style={styles.name}> Recommended Diet</Text>
-                        <Button size="tiny" onPress={() => setVisible(true)}>
-                            ADD
-                        </Button>
-                    </View>
-                    <List data={diet} renderItem={renderItem} />
+                    {diet.length ? (
+                        <List data={diet} renderItem={renderItem} />
+                    ) : (
+                        <Text>No diet Yet</Text>
+                    )}
                 </View>
             </View>
             <View>
-                <Text category={"h5"}>Current Dosage</Text>
-                <View style={styles.Card}>
-                    <CardHeader></CardHeader>
-                    <View style={styles.dosageTimings}>
-                        <Text style={styles.when}>Dosage directions</Text>
-                        <Text>Morning, Afternoon, Evening</Text>
-                    </View>
-                    <Text style={styles.desc}>
-                        Directions for the caretaker and other remarks
-                    </Text>
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            marginTop: 20,
-                        }}
-                    >
-                        <Button
-                            accessoryLeft={EditIcon}
-                            style={[styles.button, { marginRight: 10 }]}
-                            appearance="filled"
-                        >
-                            EDIT
-                        </Button>
-
-                        <Button
-                            accessoryLeft={DeleteIcon}
-                            style={[styles.button, { marginLeft: 10 }]}
-                            status="danger"
-                            appearance="outline"
-                        >
-                            END
-                        </Button>
-                    </View>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        marginTop: 10,
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <Text category={"h5"}>Current Dosage</Text>
+                    <Button size={"small"} onPress={() => setVisible2(true)}>
+                        ADD
+                    </Button>
                 </View>
+                {dosages.map((item, index) =>
+                    item.isActive ? (
+                        <View style={styles.Card}>
+                            <CardHeader data={item}></CardHeader>
+                            <View style={styles.dosageTimings}>
+                                <Text style={styles.when}>
+                                    Dosage directions
+                                </Text>
+                                <Text>{item.dosageTimings}</Text>
+                            </View>
+                            <Text style={styles.desc}>
+                                {item.dosageInstructions}
+                            </Text>
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    marginTop: 20,
+                                }}
+                            >
+                                <Button
+                                    accessoryLeft={DeleteIcon}
+                                    style={[styles.button]}
+                                    status="danger"
+                                    appearance="outline"
+                                    onPress={() => endDosage(item.$id)}
+                                >
+                                    END
+                                </Button>
+                            </View>
+                        </View>
+                    ) : null
+                )}
             </View>
             <View style={{ marginTop: 10 }}>
                 <Text category={"h5"}>Previous Dosage</Text>
-                <View style={styles.Card}>
-                    <CardHeader></CardHeader>
-                </View>
-                <View style={styles.Card}>
-                    <CardHeader></CardHeader>
-                </View>
-                <View style={styles.Card}>
-                    <CardHeader></CardHeader>
-                </View>
+                {dosages.map((item, index) =>
+                    !item.isActive ? (
+                        <View style={styles.Card}>
+                            <CardHeader data={item}></CardHeader>
+                        </View>
+                    ) : null
+                )}
             </View>
         </View>
     );
