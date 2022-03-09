@@ -9,8 +9,7 @@ import {
     TopNavigation,
     Icon,
 } from "@ui-kitten/components";
-import SimpleDialog from "./Modals/Simple";
-import AlertDialog from "./Modals/Alert";
+
 
 // Redux
 import { useSelector } from "react-redux";

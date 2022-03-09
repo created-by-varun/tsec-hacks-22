@@ -3,10 +3,10 @@ import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Drawer, DrawerItem, IndexPath, Icon } from "@ui-kitten/components";
-import { InputsScreen } from "./screens/Inputs";
-import { ButtonsScreen } from "./screens/Buttons";
-import { TypographyScreen } from "./screens/Typography";
-import OtherUIScreen from "./screens/OtherUI";
+import DoctorUI from "./screens/Doctor";
+import CareTakerUI from "./screens/Family";
+import FamilyUI from "./screens/CareTaker";
+import PatientUI from "./screens/OtherUI";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -34,10 +34,10 @@ const DrawerContent = ({ navigation, state }) => (
 
 const HomeNavigator = () => (
   <Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-    <Screen name="OtherUI" component={OtherUIScreen} />
-    <Screen name="Inputs" component={InputsScreen} />
-    <Screen name="Typography" component={TypographyScreen} />
-    <Screen name="Buttons" component={ButtonsScreen} />
+    <Screen name="OtherUI" component={PatientUI} />
+    <Screen name="Inputs" component={DoctorUI} />
+    <Screen name="Typography" component={CareTakerUI} />
+    <Screen name="Buttons" component={FamilyUI} />
   </Navigator>
 );
 
