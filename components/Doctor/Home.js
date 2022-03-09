@@ -58,8 +58,8 @@ appwrite.account.createAnonymousSession().then(
 // });
 
 // let createDietRequest = appwrite.database.createDocument('6228e0039cf5ed1bc280', "unique()", {
-//     "title": "food item 2",
-//     "description": "description 2",
+//     "title": "food item 3",
+//     "description": "description 3",
 //     "$read": [
 //         "role:all"
 //     ],
@@ -86,16 +86,34 @@ appwrite.account.createAnonymousSession().then(
 //     }
 // );
 
-let getDietRequest = appwrite.database.listDocuments("6228e0039cf5ed1bc280");
+// let getDietRequest = appwrite.database.listDocuments("6228e0039cf5ed1bc280");
 
-getDietRequest.then(
-    function (response) {
-        console.log(response); // Success
-    },
-    function (error) {
-        console.log(error); // Failure
-    }
-);
+// getDietRequest.then(
+//     function (response) {
+//         console.log(response); // Success
+//     },
+//     function (error) {
+//         console.log(error); // Failure
+//     }
+// );
+
+// let editDietRequest = appwrite.database.updateDocument('6228e0039cf5ed1bc280', '62290b15622f0dd238ac', {
+//     "title": "test food3",
+//     "description": "food desc3",
+//     "$read": [
+//         "role:all"
+//     ],
+//     "$write": [
+//         "role:all"
+//     ],
+//     "$collection": "6228e0039cf5ed1bc280"
+// });
+
+// editDietRequest.then(function (response) {
+//     console.log(response); // Success
+// }, function (error) {
+//     console.log(error); // Failure
+// });
 
 // let promise3 = appwrite.database.listDocuments("6228e1626152b2089b96");
 
