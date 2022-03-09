@@ -11,11 +11,10 @@ import PatientUI from "./screens/Patient";
 const { Navigator, Screen } = createDrawerNavigator();
 
 // Importing icons required
-const BrowserIcon = (props) => <Icon {...props} name="browser-outline" />;
-const ColorPaletteIcon = (props) => (
-  <Icon {...props} name="color-palette-outline" />
-);
-const StarIcon = (props) => <Icon {...props} name="star" />;
+const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
+const DoctorIcon = (props) => <Icon {...props} name="person-add-outline" />;
+const CareTakerIcon = (props) => <Icon {...props} name="thermometer-outline" />;
+const FamilyIcon = (props) => <Icon {...props} name="people-outline" />;
 
 // Side Navigation Drawer
 const DrawerContent = ({ navigation, state }) => (
@@ -24,10 +23,10 @@ const DrawerContent = ({ navigation, state }) => (
       selectedIndex={new IndexPath(state.index)}
       onSelect={(index) => navigation.navigate(state.routeNames[index.row])}
     >
-      <DrawerItem title="Patient" accessoryLeft={StarIcon} />
-      <DrawerItem title="Doctor" accessoryLeft={StarIcon} />
-      <DrawerItem title="Caretaker" accessoryLeft={ColorPaletteIcon} />
-      <DrawerItem title="Family" accessoryLeft={BrowserIcon} />
+      <DrawerItem title="Patient" accessoryLeft={PersonIcon} />
+      <DrawerItem title="Doctor" accessoryLeft={DoctorIcon} />
+      <DrawerItem title="Caretaker" accessoryLeft={CareTakerIcon} />
+      <DrawerItem title="Family" accessoryLeft={FamilyIcon} />
     </Drawer>
   </SafeAreaView>
 );

@@ -10,7 +10,8 @@ import DialogsScreen from "../components/OtherUI/Dialogs";
 import SliderScreen from "../components/OtherUI/Slider";
 
 const { Navigator, Screen } = createBottomTabNavigator();
-const Email = (props) => <Icon {...props} name="email-outline" />;
+const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
+const GameIcon = (props) => <Icon {...props} name="play-circle-outline" />;
 
 const BottomTabBar = ({ navigation, state }) => (
     <SafeAreaView>
@@ -18,8 +19,8 @@ const BottomTabBar = ({ navigation, state }) => (
             selectedIndex={state.index}
             onSelect={(index) => navigation.navigate(state.routeNames[index])}
         >
-            <BottomNavigationTab title="Home" icon={Email} />
-            <BottomNavigationTab title="Games" icon={Email} />
+            <BottomNavigationTab title="Home" icon={HomeIcon} />
+            <BottomNavigationTab title="Games" icon={GameIcon} />
         </BottomNavigation>
     </SafeAreaView>
 );
