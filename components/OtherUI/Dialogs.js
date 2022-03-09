@@ -7,28 +7,17 @@ import {
     Image,
     TouchableOpacity,
 } from "react-native";
-import { DrawerActions } from "@react-navigation/native";
-import {
-    Layout,
-    Text,
-    Button,
-    TopNavigationAction,
-    TopNavigation,
-    Icon,
-    Avatar,
-} from "@ui-kitten/components";
+import { Video, AVPlaybackStatus } from "expo-av";
+import { Text, Avatar } from "@ui-kitten/components";
 import ImageView from "react-native-image-viewing";
-
-// Redux
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { increment, reset, decrement } from "../../store/actions/count";
 
 const DialogsScreen = ({ navigation }) => {
     const patientData = {
         name: "John Doe",
         age: "30",
     };
+    const video = React.useRef(null);
+    const [status, setStatus] = React.useState({});
 
     const images = [
         {
@@ -116,7 +105,7 @@ const DialogsScreen = ({ navigation }) => {
                     <Text category={"h5"}>Memories</Text>
                     <View style={{ flexDirection: "row", marginTop: 20 }}>
                         <TouchableOpacity
-                            style={{ flex: 1 }}
+                            style={{ flex: 1, marginRight: 5 }}
                             onPress={() => setIsVisible(true)}
                         >
                             <Image
@@ -127,12 +116,11 @@ const DialogsScreen = ({ navigation }) => {
                                     flex: 1,
                                     width: "100%",
                                     height: 200,
-                                    marginRight: 5,
                                 }}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={{ flex: 1 }}
+                            style={{ flex: 1, marginLeft: 5 }}
                             onPress={() => setIsVisible(true)}
                         >
                             <Image
@@ -143,7 +131,6 @@ const DialogsScreen = ({ navigation }) => {
                                     flex: 1,
                                     width: "100%",
                                     height: 200,
-                                    marginLeft: 5,
                                 }}
                             />
                         </TouchableOpacity>
@@ -161,7 +148,7 @@ const DialogsScreen = ({ navigation }) => {
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={{ flex: 1 }}
+                            style={{ flex: 1, marginHorizontal: 10 }}
                             onPress={() => setIsVisible(true)}
                         >
                             <Image
@@ -172,7 +159,6 @@ const DialogsScreen = ({ navigation }) => {
                                     flex: 1,
                                     width: "100%",
                                     height: 100,
-                                    marginHorizontal: 10,
                                 }}
                             />
                         </TouchableOpacity>
@@ -180,14 +166,22 @@ const DialogsScreen = ({ navigation }) => {
                             style={{ flex: 1 }}
                             onPress={() => setIsVisible(true)}
                         >
-                        <Image
-                            source={{
-                                uri: "https://images.unsplash.com/photo-1638202948587-ac48463ddb1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                            }}
-                            style={{ flex: 1, width: "100%", height: 100 }}
-                        />
+                            <Image
+                                source={{
+                                    uri: "https://images.unsplash.com/photo-1638202948587-ac48463ddb1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+                                }}
+                                style={{ flex: 1, width: "100%", height: 100 }}
+                            />
                         </TouchableOpacity>
                     </View>
+                    <Video
+                        style={styles.video}
+                        source={{
+                            uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+                        }}
+                        useNativeControls
+                        resizeMode="contain"
+                    />
                     <ImageView
                         style={{ width: 400, height: 200 }}
                         images={images}
@@ -221,6 +215,11 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         alignItems: "center",
     },
+    video: {
+        height: 210,
+        width: '100%',
+        marginTop: 10
+    }
 });
 
 export default DialogsScreen;
