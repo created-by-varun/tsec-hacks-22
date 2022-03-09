@@ -6,7 +6,7 @@ import { Drawer, DrawerItem, IndexPath, Icon } from "@ui-kitten/components";
 import DoctorUI from "./screens/Doctor";
 import CareTakerUI from "./screens/Family";
 import FamilyUI from "./screens/CareTaker";
-import PatientUI from "./screens/OtherUI";
+import PatientUI from "./screens/Patient";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
