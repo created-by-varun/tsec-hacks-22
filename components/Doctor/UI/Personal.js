@@ -43,7 +43,7 @@ const Personal = () => {
                             Address
                         </Text>
                         <Text style={styles.when}>
-                            Inida idjfijsdli fjsfiljsdfiljsdifjsi lsdjflsjdf
+                        1st Foor, Nr Gune Hospital, Panvel City - 400601
                         </Text>
                     </View>
                 </View></>

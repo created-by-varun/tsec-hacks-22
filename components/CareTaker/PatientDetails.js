@@ -4,53 +4,14 @@ import {
     Text, Avatar, Tab, TabView, Icon, Layout
 } from "@ui-kitten/components";
 
-import MedicalDetails from './UI/Medical'
-import Personal from "./UI/Personal";
+import PatientDetailsDoc from '../Doctor/PatientDetails'
 
-const PatientDetails = ({ navigation }) => {
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
-    const PersonIcon = (props) => (
-        <Icon {...props} name='person-outline' />
-    );
-
-    const EmailIcon = (props) => (
-        <Icon {...props} name='email-outline' />
-    );
-
-
-    const shouldLoadComponent = (index) => index === selectedIndex;
+const PatientDetails = ({ navigation, route }) => {
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-                <View style={styles.headerCard}>
-                    <Avatar style={styles.avatar} source={require('../../assets/avatar.jpeg')} />
-                    <View style={styles.headerTxtCon}>
-                        <Text category='h5' style={{ marginBottom: 10 }}>Patient Name</Text>
-                        <Text style={styles.text}>Blood Type: O+</Text>
-                        <Text style={styles.text}>Age: 40</Text>
-                        <Text style={styles.text}>Caretaker: Nurse Meghana</Text>
-                    </View>
-                </View>
-                <TabView
-                    selectedIndex={selectedIndex}
-                    shouldLoadComponent={shouldLoadComponent}
-                    onSelect={index => {
-                        setSelectedIndex(index)
-                    }}>
-                    <Tab title='Medical' icon={PersonIcon}>
-                        <Layout style={styles.tabContainer}>
-                            <MedicalDetails />
-                        </Layout>
-                    </Tab>
-                    <Tab title='Personal' icon={EmailIcon}>
-                        <Layout style={styles.tabContainer}>
-                            <Personal />
-                        </Layout>
-                    </Tab>
-                </TabView>
-            </ScrollView>
-        </SafeAreaView>
+        <>
+        <PatientDetailsDoc appUser={route.params.user} hideActions></PatientDetailsDoc>
+        </>
     );
 };
 

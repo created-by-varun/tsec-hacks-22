@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     StyleSheet,
     SafeAreaView,
@@ -25,29 +25,8 @@ appwrite.account.createAnonymousSession().then(
     }
 );
 
-// let editUserRequest = appwrite.database.updateDocument(
-//     "6228d54f76210a45d192",
-//     "6228d69ee8b81276abfb",
-//     {
-//         name: "Varun",
-//         age: 22,
-//         caretaker: "Nurse Sara",
-//         doctorname: "Dr. Stevenson",
-//         $read: ["role:all"],
-//         $write: ["role:all"],
-//         $id: "6228d69ee8b81276abfb",
-//         $collection: "6228d54f76210a45d192",
-//     }
-// );
 
-// editUserRequest.then(
-//     function (response) {
-//         console.log(response); // Success
-//     },
-//     function (error) {
-//         console.log(error); // Failure
-//     }
-// );
+
 
 // let deleteDietRequest = appwrite.database.deleteDocument('6228e0039cf5ed1bc280', '6228e05a3e136617bb46');
 
@@ -75,16 +54,8 @@ appwrite.account.createAnonymousSession().then(
 //     console.log(error); // Failure
 // });
 
-// let promise = appwrite.database.listDocuments("6228d54f76210a45d192");
+let getUserRequest = appwrite.database.listDocuments("6228d54f76210a45d192");
 
-// promise.then(
-//     function (response) {
-//         console.log(response); // Success
-//     },
-//     function (error) {
-//         console.log(error); // Failure
-//     }
-// );
 
 // let getDietRequest = appwrite.database.listDocuments("6228e0039cf5ed1bc280");
 
@@ -126,8 +97,21 @@ appwrite.account.createAnonymousSession().then(
 //     }
 // );
 
-const DocHome = ({ navigation }) => {
+const DocHome = ({ navigation, caretaker }) => {
     const [value, setValue] = React.useState("");
+
+
+    const [user, setUser] = React.useState({});
+    useEffect(() => {
+        getUserRequest.then(
+            function (response) {
+                setUser(response.documents[0]);
+            },
+            function (error) {
+                console.log(error); // Failure
+            }
+        );
+    },[])
     const renderIcon = props => (
         <TouchableWithoutFeedback>
             <Icon {...props} name={"search"} />
@@ -155,12 +139,12 @@ const DocHome = ({ navigation }) => {
                         />
                     </View>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("PatientDetails")}
+                        onPress={() => navigation.navigate("PatientDetails", { user: user})}
                     >
                         <View style={styles.patientCard}>
                             <View style={{ flexDirection: "row" }}>
                                 <View style={styles.patientInfo}>
-                                    <Text category="h5">Patient Name</Text>
+                                    <Text category="h5">{ user?.name }</Text>
                                     <View
                                         style={{
                                             flexDirection: "row",
@@ -168,12 +152,13 @@ const DocHome = ({ navigation }) => {
                                         }}
                                     >
                                         <Text style={styles.text}>
-                                            Blood Type: O+
+                                            Blood Type: { user?.bloodType }
                                         </Text>
-                                        <Text style={styles.text}>Age: 40</Text>
+                                        <Text style={styles.text}>Age: { user?.age }</Text>
                                     </View>
                                     <Text style={styles.text}>
-                                        Caretaker: Nurse Meghana
+                                        {caretaker ? "Doctor" : "Caretaker"}: 
+                                         { caretaker ? user?.doctorname : user?.caretaker }
                                     </Text>
                                 </View>
                                 <Avatar

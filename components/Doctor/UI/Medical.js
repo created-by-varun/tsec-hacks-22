@@ -19,9 +19,7 @@ appwrite
     .setEndpoint("http://localhost/v1") // Your Appwrite Endpoint
     .setProject("6228cca7c05ffbaf27d3"); // Your project ID
 
-
-
-const Medical = () => {
+const Medical = ({ hideActions }) => {
     const [diet, setDiet] = useState([]);
     const [visible, setVisible] = React.useState(false);
     const [addDiet, setaddDiet] = React.useState("");
@@ -30,10 +28,9 @@ const Medical = () => {
     const [visible2, setVisible2] = React.useState(false);
     const [addDosageMed, setDosageMed] = React.useState("");
     const [addFrom, setaddFrom] = React.useState("");
-    const [addTo, settAddTo] = React.useState(""); 
+    const [addTo, settAddTo] = React.useState("");
     const [dosageInsts, setDosageInsts] = React.useState("");
     const [remarks, setRemarks] = React.useState("");
-
 
     useEffect(() => {
         getDiets();
@@ -111,7 +108,7 @@ const Medical = () => {
                 $read: ["role:all"],
                 $write: ["role:all"],
                 $collection: "6228e1626152b2089b96",
-                isActive: true
+                isActive: true,
             }
         );
 
@@ -132,7 +129,7 @@ const Medical = () => {
                 console.log(error); // Failure
             }
         );
-    }
+    };
 
     const deleteDiet = id => {
         let deleteDietRequest = appwrite.database.deleteDocument(
@@ -154,8 +151,9 @@ const Medical = () => {
     const endDosage = id => {
         let endDosageRqt = appwrite.database.updateDocument(
             "6228e1626152b2089b96",
-            id,{
-                isActive: false
+            id,
+            {
+                isActive: false,
             }
         );
         endDosageRqt.then(
@@ -194,7 +192,7 @@ const Medical = () => {
             key={index}
             title={`${item.title}`}
             description={`${item.description}`}
-            accessoryRight={() => renderItemAccessory(item)}
+            accessoryRight={() => !hideActions && renderItemAccessory(item)}
             accessoryLeft={ItemImage}
         />
     );
@@ -253,19 +251,19 @@ const Medical = () => {
                             value={addFrom}
                             placeholder="Enter from date"
                         />
-                         <Input
+                        <Input
                             style={styles.input}
                             onChangeText={settAddTo}
                             value={addTo}
                             placeholder="Enter to date"
                         />
-                         <Input
+                        <Input
                             style={styles.input}
                             onChangeText={setDosageInsts}
                             value={dosageInsts}
                             placeholder="Enter dosage instructions"
                         />
-                           <Input
+                        <Input
                             style={styles.input}
                             onChangeText={setRemarks}
                             value={remarks}
@@ -274,6 +272,7 @@ const Medical = () => {
                         <Button onPress={() => addDosageFc()}>ADD</Button>
                     </Card>
                 </Modal>
+                <Text category={'h5'}>Latest Check Up</Text>
                 <View style={styles.box}>
                     <Text style={styles.when}>BP</Text>
                     <Text style={styles.when}>Normal</Text>
@@ -304,9 +303,11 @@ const Medical = () => {
                     }}
                 >
                     <Text category={"h5"}>Recommended Diet</Text>
-                    <Button size={"small"} onPress={() => setVisible(true)}>
-                        ADD
-                    </Button>
+                    {!hideActions && (
+                        <Button size={"small"} onPress={() => setVisible(true)}>
+                            ADD
+                        </Button>
+                    )}
                 </View>
                 <View style={styles.Card}>
                     {diet.length ? (
@@ -326,9 +327,14 @@ const Medical = () => {
                     }}
                 >
                     <Text category={"h5"}>Current Dosage</Text>
-                    <Button size={"small"} onPress={() => setVisible2(true)}>
-                        ADD
-                    </Button>
+                    {!hideActions && (
+                        <Button
+                            size={"small"}
+                            onPress={() => setVisible2(true)}
+                        >
+                            ADD
+                        </Button>
+                    )}
                 </View>
                 {dosages.map((item, index) =>
                     item.isActive ? (
@@ -343,7 +349,7 @@ const Medical = () => {
                             <Text style={styles.desc}>
                                 {item.dosageInstructions}
                             </Text>
-                            <View
+                            {!hideActions &&   <View
                                 style={{
                                     flexDirection: "row",
                                     marginTop: 20,
@@ -358,21 +364,23 @@ const Medical = () => {
                                 >
                                     END
                                 </Button>
+                            </View> }
+                        </View>
+                    ) : null
+                )}
+            </View>
+            {!hideActions && (
+                <View style={{ marginTop: 10 }}>
+                    <Text category={"h5"}>Previous Dosage</Text>
+                    {dosages.map((item, index) =>
+                        !item.isActive ? (
+                            <View style={styles.Card}>
+                                <CardHeader data={item}></CardHeader>
                             </View>
-                        </View>
-                    ) : null
-                )}
-            </View>
-            <View style={{ marginTop: 10 }}>
-                <Text category={"h5"}>Previous Dosage</Text>
-                {dosages.map((item, index) =>
-                    !item.isActive ? (
-                        <View style={styles.Card}>
-                            <CardHeader data={item}></CardHeader>
-                        </View>
-                    ) : null
-                )}
-            </View>
+                        ) : null
+                    )}
+                </View>
+            )}
         </View>
     );
 };

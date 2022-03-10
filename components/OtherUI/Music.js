@@ -11,7 +11,7 @@ const MusicScreen = () => {
         </View>
           <WebView 
           style={{flex: 1}}
-          source={{ uri: 'https://open.spotify.com/playlist/1sbvt56bSpg6WBqVzIRpID' }}
+          source={{ uri: 'https://wynk.in/music/album/patient-heart/um_00602508252372' }}
           />
       </>
     )

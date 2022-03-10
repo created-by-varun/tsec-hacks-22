@@ -1,51 +1,71 @@
 import React from "react";
 import { StyleSheet, SafeAreaView, View, ScrollView } from "react-native";
 import {
-    Text, Avatar, Tab, TabView, Icon, Layout
+    Text,
+    Avatar,
+    Tab,
+    TabView,
+    Icon,
+    Layout,
 } from "@ui-kitten/components";
 
-import MedicalDetails from './UI/Medical'
+import MedicalDetails from "./UI/Medical";
 import Personal from "./UI/Personal";
 
-const PatientDetails = ({ navigation }) => {
+const PatientDetails = ({ navigation, hideActions, route, appUser }) => {
+    const [User, setUser] = React.useState(null);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
-    const PersonIcon = (props) => (
-        <Icon {...props} name='person-outline' />
-    );
+    const PersonIcon = props => <Icon {...props} name="person-outline" />;
 
-    const EmailIcon = (props) => (
-        <Icon {...props} name='email-outline' />
-    );
+    React.useEffect(() => {
+        if (route?.params.user) {
+            setUser(route?.params.user);
+        } else {
+            if(appUser) setUser(appUser)
+        }
+    }, []);
 
+    const EmailIcon = props => <Icon {...props} name="email-outline" />;
 
-    const shouldLoadComponent = (index) => index === selectedIndex;
+    const shouldLoadComponent = index => index === selectedIndex;
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
                 <View style={styles.headerCard}>
-                    <Avatar style={styles.avatar} source={require('../../assets/avatar.jpeg')} />
+                    <Avatar
+                        style={styles.avatar}
+                        source={require("../../assets/avatar.jpeg")}
+                    />
                     <View style={styles.headerTxtCon}>
-                        <Text category='h5' style={{ marginBottom: 10 }}>Patient Name</Text>
-                        <Text style={styles.text}>Blood Type: O+</Text>
-                        <Text style={styles.text}>Age: 40</Text>
-                        <Text style={styles.text}>Caretaker: Nurse Meghana</Text>
+                        <Text category="h5" style={{ marginBottom: 10 }}>
+                            {User?.name}
+                        </Text>
+                        <Text style={styles.text}>
+                            Blood Type: {User?.bloodType}
+                        </Text>
+                        <Text style={styles.text}>Age: {User?.age }</Text>
+                        <Text style={styles.text}>
+                            {hideActions ? "Doctor" : "Caretaker"}:{" "}
+                            {hideActions ? User?.doctorname : User?.caretaker}
+                        </Text>
                     </View>
                 </View>
                 <TabView
                     selectedIndex={selectedIndex}
                     shouldLoadComponent={shouldLoadComponent}
                     onSelect={index => {
-                        setSelectedIndex(index)
-                    }}>
-                    <Tab title='Medical' icon={PersonIcon}>
+                        setSelectedIndex(index);
+                    }}
+                >
+                    <Tab title="Medical" icon={PersonIcon}>
                         <View style={styles.tabContainer}>
                             <ScrollView showsVerticalScrollIndicator="false">
-                                <MedicalDetails />
+                                <MedicalDetails hideActions={hideActions} />
                             </ScrollView>
                         </View>
                     </Tab>
-                    <Tab title='Personal' icon={EmailIcon}>
+                    <Tab title="Personal" icon={EmailIcon}>
                         <Layout style={styles.tabContainer}>
                             <ScrollView>
                                 <Personal />
@@ -61,30 +81,31 @@ const PatientDetails = ({ navigation }) => {
 const styles = StyleSheet.create({
     avatar: {
         width: 110,
-        height: 110
+        height: 110,
     },
     headerTxtCon: {
-        marginLeft: 20
+        marginLeft: 20,
     },
     text: {
         fontSize: 14,
         lineHeight: 24,
     },
     headerCard: {
-        backgroundColor: 'white',
+        backgroundColor: "white",
         padding: 20,
-        flexDirection: 'row', alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         borderRadius: 8,
         elevation: 2,
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
     },
     tabContainer: {
         padding: 20,
         height: 600,
-        overflow: 'scroll'
-    }
+        overflow: "scroll",
+    },
 });
 
 export default PatientDetails;
