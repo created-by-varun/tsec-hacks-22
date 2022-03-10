@@ -112,6 +112,35 @@ const GamesHome = ({ navigation }) => {
                         </View>
                     </TouchableOpacity>
 
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate('JokeScreen')
+                        }}
+                        style={{
+                            backgroundColor: "#F4e392",
+                            borderRadius: 8,
+                            flexDirection: "row",
+                            marginBottom: 20,
+                        }}
+                    >
+                        
+                        <View
+                            style={{
+                                flex: 1,
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Text category={"h4"}>
+                                In the mood for a laugh?
+                            </Text>
+                        </View>
+                        <Image
+                            style={{ width: 200, height: 200, flex: 1 }}
+                            source={require("../../../assets/cups.jpeg")}
+                        />
+                    </TouchableOpacity>
+
                     
                 </View>
             </ScrollView>

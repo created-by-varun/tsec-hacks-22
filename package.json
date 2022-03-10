@@ -42,7 +42,8 @@
     "react-native-webview": "11.6.2",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
-    "expo-linking": "~2.3.1"
+    "expo-linking": "~2.3.1",
+    "expo-speech": "~9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
