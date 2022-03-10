@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 import * as Speech from 'expo-speech';
 import axios from 'axios';
-import { Button, Text } from '@ui-kitten/components';
+import { Button, Text, TopNavigation, TopNavigationAction, Icon } from '@ui-kitten/components';
 
-export default function JokeScreen() {
+export default function JokeScreen({navigation}) {
 
     const [joke, setJoke] = React.useState('');
+
+    const Menu = (props) => <Icon {...props} name="arrow-back-outline" />;
 
     const getJoke = async () => {
         let joke = await axios.get('https://backend-omega-seven.vercel.app/api/getjoke');
@@ -29,8 +31,17 @@ export default function JokeScreen() {
     }, 3500);
   };
 
+  const MenuAction = () => (
+    <TopNavigationAction icon={Menu} onPress={()=> navigation.goBack()} />
+);
+
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+        <TopNavigation
+                title="Hear a joke"
+                alignment="center"
+                accessoryLeft={MenuAction}
+            />
         <View style={{padding: 20, paddingTop: 30}}>
             <Text></Text>
             {joke.question && (
@@ -41,7 +52,7 @@ export default function JokeScreen() {
             )}
       <Button onPress={getJoke}>Click here for a new joke</Button>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
