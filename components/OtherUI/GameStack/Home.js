@@ -117,10 +117,12 @@ const GamesHome = ({ navigation }) => {
                             navigation.navigate('JokeScreen')
                         }}
                         style={{
-                            backgroundColor: "#F4e392",
+                            backgroundColor: "#fff",
                             borderRadius: 8,
                             flexDirection: "row",
                             marginBottom: 20,
+                            borderColor: 'black',
+                            borderWidth: 1
                         }}
                     >
                         
@@ -136,8 +138,8 @@ const GamesHome = ({ navigation }) => {
                             </Text>
                         </View>
                         <Image
-                            style={{ width: 200, height: 200, flex: 1 }}
-                            source={require("../../../assets/cups.jpeg")}
+                            style={{ width: 200, height: 200, flex: 1, borderRadius: 8 }}
+                            source={require("../../../assets/haha.jpeg")}
                         />
                     </TouchableOpacity>
 
