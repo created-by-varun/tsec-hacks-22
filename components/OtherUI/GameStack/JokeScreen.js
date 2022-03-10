@@ -58,11 +58,11 @@ export default function JokeScreen({navigation}) {
 
 const styles = StyleSheet.create({
     question: {
-        fontSize: 20,
-        marginBottom: 20,
+        fontSize: 35,
+        marginBottom: 30,
     },
     punchline: {
-        fontSize: 20,
-        marginBottom: 20,
+        fontSize: 30,
+        marginBottom: 40,
     }
 });
