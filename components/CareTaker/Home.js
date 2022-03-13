@@ -44,7 +44,7 @@ const CareHome = ({ navigation }) => {
                 backdropStyle={styles.backdrop}
                 onBackdropPress={() => setVisible(false)}
             >
-                <Card disabled={true} style={{ width: 260 }}>
+                <Card disabled={true} style={{ width: 350 }}>
                     <Input
                         style={styles.input}
                         onChangeText={setlink}
